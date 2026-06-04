@@ -5,6 +5,7 @@
     instances : ["mongodb","redis","rabbitmq","mysql"]
     image_id : ami-0220d79f3f480ecf5
     region: us-east-1
+    
   tasks :
   - name : create ec2 instances
     amazon.aws.ec2_instance:
