@@ -5,7 +5,7 @@
     instances : ["mongodb","redis","rabbitmq","mysql"]
     image_id : ami-0220d79f3f480ecf5
     region: us-east-1
-    
+
   tasks :
   - name : create ec2 instances
     amazon.aws.ec2_instance:
@@ -25,5 +25,5 @@
 
   - name : create R53 records
     debug :
-      msg : " instance_name : {{ item.item }} private_ip : {{ item.instance[0].private_ip }}  "
+      msg : " instance_name : {{ item.item }} private_ip : {{ item.instances[0].private_ip }}  "
     loop : "{{ ec2_output.results }}"
