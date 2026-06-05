@@ -19,11 +19,11 @@
     loop : "{{ instances }}"
     register : ec2_output
 
-  # - name : print output
-  #   debug :
-  #     msg : " {{ ec2_output }}"
-
-  - name : create R53 records
+  - name : print output
     debug :
-      msg : " instance_name : {{ item.item }} private_ip : {{ item.instances[0].private_ip_address }}  "
-    loop : "{{ ec2_output.results }}"
+      msg : " {{ ec2_output }}"
+
+  # - name : create R53 records
+  #   debug :
+  #     msg : " instance_name : {{ item.item }} private_ip : {{ item.instances[0].private_ip_address }}  "
+  #   loop : "{{ ec2_output.results }}"
