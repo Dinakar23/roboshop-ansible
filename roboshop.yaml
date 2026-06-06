@@ -82,3 +82,11 @@
     when : 
     - action == "delete"
     - item == "frontend"
+
+  - name: Delete roboshop ec2 instances
+    amazon.aws.ec2_instance:
+      state: absent                                 # 1. Tells AWS to terminate the instance
+      name: "roboshop-{{ item }}"                  # 2. Finds the instance matching this exact name
+      region: "{{ region }}"
+    loop: "{{ instances }}"      
+    when : action == "delete"                  # 3. Loops through ["mongodb", "redis", "rabbitmq", "mysql"]
