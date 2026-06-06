@@ -2,10 +2,11 @@
   hosts : local
   connection : local
   vars :
-    instances : ["mongodb","redis","rabbitmq","mysql"]
+    instances : ["mongodb","redis","rabbitmq","mysql","frontend"]
     image_id : ami-0220d79f3f480ecf5
     region: us-east-1
     domain_name : dinakardevops.online
+    action : create
 
   tasks :
   - name : create ec2 instances
@@ -19,6 +20,7 @@
       region: "{{ region }}"
     loop : "{{ instances }}"
     register : ec2_output
+    when : action=="create"
 
   # - name : print output
   #   debug :
@@ -39,6 +41,8 @@
       overwrite : true
       value : "{{ item.instances[0].private_ip_address }}"
     loop : "{{ ec2_output.results }}"
+    when : action=="create"
+
 
   - name : Create Route53 record for frontend 
     amazon.aws.route53 :
@@ -50,4 +54,29 @@
       overwrite: true
       value : "{{ item.instances[0].public_ip_address }}"
     loop : "{{ ec2_output.results }}" 
-    when : item.item == "frontend"
+    when : 
+      - item.item == "frontend"
+      - action=="create"
+
+
+  - name : Delete Route53 records
+    amazon.aws.route53 :
+      state : absent
+      zone : "{{ domain_name }}"
+      record : "{{ item.item }}.{{ domain_name }}"
+      type: A
+      ttl: 1
+    loop : "{{ instances }}"
+    when : action == "delete"
+
+  - name : Delete Route53 frontend records
+    amazon.aws.route53 :
+      state : absent
+      zone : "{{ domain_name }}"
+      record : "{{ domain_name }}" #dinakardevops.online
+      type: A
+      ttl: 1
+    loop : "{{ instances }}"
+    when : 
+    - action == "delete"
+    - item == "frontend"
