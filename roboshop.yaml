@@ -33,7 +33,7 @@
     amazon.aws.route53 :
       state: present
       zone: "{{ domain_name }}"
-      rocord : "{{ item.item }}.{{ domain_name }}" #mongodb.dinakardevops.online
+      record : "{{ item.item }}.{{ domain_name }}" #mongodb.dinakardevops.online
       type: A
       ttl: 1
       overwrite : true
@@ -44,7 +44,7 @@
     amazon.aws.route53 :
       state: present
       zone: "{{ domain_name }}"
-      rocord : "{{ domain_name }}" #mongodb.dinakardevops.online
+      record : "{{ domain_name }}" #mongodb.dinakardevops.online
       type: A
       ttl: 1
       overwrite: true
