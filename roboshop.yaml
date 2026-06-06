@@ -47,6 +47,7 @@
       rocord : "{{ domain_name }}" #mongodb.dinakardevops.online
       type: A
       ttl: 1
+      overwrite: true
       value : "{{ item.instances[0].public_ip_address }}"
     loop : "{{ ec2_output.results }}" 
     when : item.item == "frontend"
