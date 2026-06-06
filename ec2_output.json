@@ -9,7 +9,7 @@
       "instance": {
         "instance_id": "i-0e22597be6ca8acfb",
         "name": "roboshop-mongodb",
-        "state": "pending",
+        "state": "running",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
         "private_ip": "172.31.11.142",
@@ -40,7 +40,7 @@
       "instance": {
         "instance_id": "i-014a2bceaa55b7b8f",
         "name": "roboshop-redis",
-        "state": "pending",
+        "state": "running",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
         "private_ip": "172.31.15.220",
@@ -71,7 +71,7 @@
       "instance": {
         "instance_id": "i-00445024e1d37ac4e",
         "name": "roboshop-rabbitmq",
-        "state": "pending",
+        "state": "running",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
         "private_ip": "172.31.9.85",
@@ -102,7 +102,7 @@
       "instance": {
         "instance_id": "i-00205e103e56e9aa4",
         "name": "roboshop-mysql",
-        "state": "pending",
+        "state": "running",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
         "private_ip": "172.31.7.42",
