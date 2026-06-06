@@ -63,19 +63,21 @@
     amazon.aws.route53 :
       state : absent
       zone : "{{ domain_name }}"
-      record : "{{ item.item }}.{{ domain_name }}"
+      record : "{{ item }}.{{ domain_name }}"
       type: A
       ttl: 1
+      overwrite: true
     loop : "{{ instances }}"
     when : action == "delete"
 
-  - name : Delete Route53 frontend records
+  - name : Delete Route53 for  frontend record
     amazon.aws.route53 :
       state : absent
       zone : "{{ domain_name }}"
       record : "{{ domain_name }}" #dinakardevops.online
       type: A
       ttl: 1
+      overwrite: true
     loop : "{{ instances }}"
     when : 
     - action == "delete"
