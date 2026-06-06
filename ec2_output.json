@@ -1,21 +1,21 @@
 {
-  "changed": false,
+  "changed": true,
   "msg": "All items completed",
   "results": [
     {
       "item": "mongodb",
-      "changed": false,
+      "changed": true,
       "failed": false,
       "instance": {
-        "instance_id": "i-0bafb35709c2d6404",
+        "instance_id": "i-0e22597be6ca8acfb",
         "name": "roboshop-mongodb",
-        "state": "running",
+        "state": "pending",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
-        "private_ip": "172.31.4.12",
-        "public_ip": "44.222.174.248",
-        "private_dns": "ip-172-31-4-12.ec2.internal",
-        "public_dns": "ec2-44-222-174-248.compute-1.amazonaws.com",
+        "private_ip": "172.31.11.142",
+        "public_ip": "44.192.125.123",
+        "private_dns": "ip-172-31-11-142.ec2.internal",
+        "public_dns": "ec2-44-192-125-123.compute-1.amazonaws.com",
         "availability_zone": "us-east-1a",
         "vpc_id": "vpc-0f2f48c0b94282a93",
         "subnet_id": "subnet-0082d9d28b738adcf",
@@ -29,24 +29,24 @@
             "group_id": "sg-07c5f9de596dd2dc3"
           }
         ],
-        "launch_time": "2026-06-05T15:49:06+00:00",
+        "launch_time": "2026-06-06T03:10:25+00:00",
         "platform": "Red Hat Enterprise Linux"
       }
     },
     {
       "item": "redis",
-      "changed": false,
+      "changed": true,
       "failed": false,
       "instance": {
-        "instance_id": "i-0102c1fe727556a4c",
+        "instance_id": "i-014a2bceaa55b7b8f",
         "name": "roboshop-redis",
-        "state": "running",
+        "state": "pending",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
-        "private_ip": "172.31.6.223",
-        "public_ip": "100.54.131.20",
-        "private_dns": "ip-172-31-6-223.ec2.internal",
-        "public_dns": "ec2-100-54-131-20.compute-1.amazonaws.com",
+        "private_ip": "172.31.15.220",
+        "public_ip": "44.200.254.246",
+        "private_dns": "ip-172-31-15-220.ec2.internal",
+        "public_dns": "ec2-44-200-254-246.compute-1.amazonaws.com",
         "availability_zone": "us-east-1a",
         "vpc_id": "vpc-0f2f48c0b94282a93",
         "subnet_id": "subnet-0082d9d28b738adcf",
@@ -60,24 +60,24 @@
             "group_id": "sg-07c5f9de596dd2dc3"
           }
         ],
-        "launch_time": "2026-06-05T15:49:11+00:00",
+        "launch_time": "2026-06-06T03:10:29+00:00",
         "platform": "Red Hat Enterprise Linux"
       }
     },
     {
       "item": "rabbitmq",
-      "changed": false,
+      "changed": true,
       "failed": false,
       "instance": {
-        "instance_id": "i-05977bebd6d1bcc07",
+        "instance_id": "i-00445024e1d37ac4e",
         "name": "roboshop-rabbitmq",
-        "state": "running",
+        "state": "pending",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
-        "private_ip": "172.31.10.88",
-        "public_ip": "3.218.142.202",
-        "private_dns": "ip-172-31-10-88.ec2.internal",
-        "public_dns": "ec2-3-218-142-202.compute-1.amazonaws.com",
+        "private_ip": "172.31.9.85",
+        "public_ip": "34.200.237.62",
+        "private_dns": "ip-172-31-9-85.ec2.internal",
+        "public_dns": "ec2-34-200-237-62.compute-1.amazonaws.com",
         "availability_zone": "us-east-1a",
         "vpc_id": "vpc-0f2f48c0b94282a93",
         "subnet_id": "subnet-0082d9d28b738adcf",
@@ -91,24 +91,24 @@
             "group_id": "sg-07c5f9de596dd2dc3"
           }
         ],
-        "launch_time": "2026-06-05T15:49:30+00:00",
+        "launch_time": "2026-06-06T03:10:34+00:00",
         "platform": "Red Hat Enterprise Linux"
       }
     },
     {
       "item": "mysql",
-      "changed": false,
+      "changed": true,
       "failed": false,
       "instance": {
-        "instance_id": "i-0b81d683b95f36b6d",
+        "instance_id": "i-00205e103e56e9aa4",
         "name": "roboshop-mysql",
-        "state": "running",
+        "state": "pending",
         "instance_type": "t3.micro",
         "image_id": "ami-0220d79f3f480ecf5",
-        "private_ip": "172.31.4.130",
-        "public_ip": "3.235.161.192",
-        "private_dns": "ip-172-31-4-130.ec2.internal",
-        "public_dns": "ec2-3-235-161-192.compute-1.amazonaws.com",
+        "private_ip": "172.31.7.42",
+        "public_ip": "3.222.215.250",
+        "private_dns": "ip-172-31-7-42.ec2.internal",
+        "public_dns": "ec2-3-222-215-250.compute-1.amazonaws.com",
         "availability_zone": "us-east-1a",
         "vpc_id": "vpc-0f2f48c0b94282a93",
         "subnet_id": "subnet-0082d9d28b738adcf",
@@ -122,7 +122,7 @@
             "group_id": "sg-07c5f9de596dd2dc3"
           }
         ],
-        "launch_time": "2026-06-05T15:49:34+00:00",
+        "launch_time": "2026-06-06T03:10:38+00:00",
         "platform": "Red Hat Enterprise Linux"
       }
     }
