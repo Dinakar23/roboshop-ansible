@@ -3,3 +3,4 @@ ansible_password : DevOps321
 
 MONGODB_HOST : mongodb.dinakardevops.online
 REDIS_HOST : redis.dinakardevops.online
+CATALOGUE_HOST : catalogue.dinakardevops.online

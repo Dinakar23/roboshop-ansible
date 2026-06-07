@@ -1,6 +1,6 @@
-- name : configuring the user 
-  host : user
-  become :yes
+- name : configuring the cart 
+  host : cart
+  become : yes
 
   tasks :
   - name : enable nodejs 20
@@ -24,24 +24,24 @@
       path : /app
       state : absent
   
-  - name : Delete  user.zip in /tmp
+  - name : Delete  cart.zip in /tmp
     file :
-      path : /tmp/user.zip
+      path : /tmp/cart.zip
       state : absent
   
   - name : create app directory
     file :
-      path : /app
+      paht : /app
       state : directory
   
-  - name : Download user code
+  - name : Download cart code
     get_url :
-      src : https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip 
-      dest : /tmp/user.zip
+      src : https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
+      dest : /tmp/cart.zip
 
-  - name : unzip user
+  - name : unzip cart
     unarchive :
-      src : /tmp/user.zip
+      src : /tmp/cart.zip
       dest : /app
       remote_src : yes
   
@@ -51,17 +51,17 @@
 
   - name : copy service
     template :
-      src : user.ser.j2
-      dest : /etc/systemd/system/user.service
+      src : cart.ser.j2
+      dest : /etc/systemd/system/cart.service
 
   - name : daemon reload
     systemd_service:
-      name : user
+      name : cart
       daemon_reload : true
 
-  - name : Start and enable user
+  - name : Start and enable cart
     service :
-      name : user
+      name : cart
       state : restarted
       enable : yes
 
