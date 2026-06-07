@@ -3,12 +3,12 @@
   become : yes
 
   tasks :
-  - name : Install mysql
+  - name : Install mysql server
     package :
-      name : mysql
+      name : mysql-server
       state : present
 
-  - name : Start MySQL Service
+  - name : Start and Enable the  MySQL Service
     service :
       name : mysqld
       state : started
