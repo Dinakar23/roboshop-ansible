@@ -12,12 +12,12 @@
       name: mongodb-org
       state: present
 
-  - naem : allow remote connections
+  - name : allow remote connections
     replace :
       path: /etc/mongod.conf
       regexp: '127.0.0.1 '
       replace: '0.0.0.0 '
-      
+
   - name : Start & Enable MongoDB Service
     Service :
       name : mongod
