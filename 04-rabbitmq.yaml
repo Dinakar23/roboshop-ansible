@@ -13,7 +13,7 @@
       name : rabbitmq-server
       state : present
 
-  - name : Start RabbitMQ Service
+  - name : Start and enable RabbitMQ Service
     service :
       name : rabbitmq-server
       state : started
