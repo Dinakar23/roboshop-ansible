@@ -68,4 +68,5 @@
     shell : mongosh --host "{{ MONGODB_HOST }}" --eval 'db.getMongo().getDBNames.indexOf("catalogue")'
     register : catalogue_output
   - name : print catalogue output
-    debug : "{{ catalogue_output }}"
+    debug : 
+      msg : "{{ catalogue_output }}"
