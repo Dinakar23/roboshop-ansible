@@ -36,7 +36,7 @@
   
   - name : Download user code
     get_url :
-      src : https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip 
+      url : https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip 
       dest : /tmp/user.zip
 
   - name : unzip user
@@ -51,7 +51,7 @@
 
   - name : copy service
     template :
-      src : user.ser.j2
+      src : user.service.j2
       dest : /etc/systemd/system/user.service
 
   - name : daemon reload

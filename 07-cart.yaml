@@ -1,5 +1,5 @@
 - name : configuring the cart 
-  host : cart
+  hosts : cart
   become : yes
 
   tasks :
