@@ -69,8 +69,15 @@
     register : catalogue_output
     tags :
     - mongodb
+
   - name : print catalogue output
     debug : 
       msg : "{{ catalogue_output }}"
+    tags :
+    - mongodb
+
+  - name : Load Products
+    shell : mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js
+    when : catalogue_output.stdout < 0
     tags :
     - mongodb
