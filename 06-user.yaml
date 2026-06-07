@@ -1,6 +1,6 @@
 - name : configuring the user 
   host : user
-  become :yes
+  become : yes
 
   tasks :
   - name : enable nodejs 20
@@ -63,5 +63,5 @@
     service :
       name : user
       state : restarted
-      enable : yes
+      enabled : yes
 

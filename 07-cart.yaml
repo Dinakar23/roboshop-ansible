@@ -63,5 +63,5 @@
     service :
       name : cart
       state : restarted
-      enable : yes
+      enabled : yes
 
