@@ -1,0 +1,20 @@
+- name : Configuring the catalogue
+  hosts : catalogue
+  become : yes
+
+  tasks :
+  - name : Enable required module
+    command : dnf module enable nodejs:20 -y
+  
+  - name : install nodejs 20
+    service :
+      name : nodejs
+      state : present
+      
+  - name : create roboshop system user
+    user :
+      name : roboshop
+      system : true 
+      home : /app
+      shell: /sbin/nologin
+      comment: "roboshop system user"
