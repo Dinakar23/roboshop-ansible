@@ -83,7 +83,7 @@
     - mongodb
   
   - name : daemon reload
-    systemd_service:
+    ansible.builtin.systemd_service:
       name : catalogue
       daemon_reload : true
 
@@ -91,4 +91,4 @@
     service :
       name : catalogue
       state : restarted
-      enable : yes
+      enabled : yes
