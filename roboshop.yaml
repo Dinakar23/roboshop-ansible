@@ -91,3 +91,5 @@
       wait : false
     loop: "{{ instances }}"      
     when : action == "delete"                  # 3. Loops through ["mongodb", "redis", "rabbitmq", "mysql"]
+
+
