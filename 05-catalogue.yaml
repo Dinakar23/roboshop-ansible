@@ -81,3 +81,15 @@
     when : catalogue_output.stdout | int < 0
     tags :
     - mongodb
+  
+  - name : daemon reload
+    systemd_service:
+      name : catalogue
+      daemon_reload : true
+    when : until_file.change
+
+  - name : Start and enable catalogue
+    service :
+      name : catalogue
+      state : restarted
+      enable : yes
