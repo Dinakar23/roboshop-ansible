@@ -7,7 +7,7 @@
     command : dnf module enable nodejs:20 -y
   
   - name : install nodejs 20
-    service :
+    package :
       name : nodejs
       state : present
       
@@ -18,3 +18,4 @@
       home : /app
       shell: /sbin/nologin
       comment: "roboshop system user"
+
