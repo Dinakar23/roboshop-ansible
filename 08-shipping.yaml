@@ -5,7 +5,7 @@
   tasks :
   - name : Install maven
     package :
-      name : {{ item }}
+      name : "{{ item }}"
       state : present
     loop :
     - maven
@@ -61,9 +61,15 @@
       dest: /etc/systemd/system/shipping.service
       remote_src : yes
       
-  # - name : Load mysql data
-  #   ansible.mysql.mysql_db:
-  #     state: import
-  #     name: all
-  #     encoding: 
-  #     target: 
+  - name : Load mysql data
+    ansible.mysql.mysql_db:
+      state: import
+      name: all
+      login_user : root
+      login_password : Roboshop@1
+      login_host : "{{ MYSQL_HOST }}"
+      target : 
+    loop:
+    - /app/db/schema.sql
+    - /app/db/app-user.sql 
+    - /app/db/master-data.sql

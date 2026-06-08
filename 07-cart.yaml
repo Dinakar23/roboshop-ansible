@@ -31,12 +31,12 @@
   
   - name : create app directory
     file :
-      paht : /app
+      path : /app
       state : directory
   
   - name : Download cart code
     get_url :
-      src : https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
+      url : https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
       dest : /tmp/cart.zip
 
   - name : unzip cart
@@ -51,7 +51,7 @@
 
   - name : copy service
     template :
-      src : cart.ser.j2
+      src : cart.service.j2
       dest : /etc/systemd/system/cart.service
 
   - name : daemon reload
