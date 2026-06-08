@@ -60,7 +60,11 @@
       src: shipping.service.j2
       dest: /etc/systemd/system/shipping.service
       
-      
+  - name : Install python dependencies
+    pip : 
+      name : PyMySQL
+      executable: pip3.9
+
   - name : Load mysql data
     community.mysql.mysql_db:
       state: import
