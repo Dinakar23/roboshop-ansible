@@ -1,0 +1,57 @@
+- name : Configuring the shipping server
+  hosts : shipping
+  become : yes
+
+  tasks :
+  - name : Install maven
+    package :
+      name : maven
+      state : present
+  
+  - name : create roboshop system user
+    user :
+      name : roboshop
+      system : true 
+      home : /app
+      shell: /sbin/nologin
+      comment: "roboshop system user"
+
+  - name : remove app directory
+    file :
+      path: /app
+      state: absent
+
+  - name : Delete shipping.zip file in the tmp directory
+    file :
+      path: /tmp/shipping.zip
+      state: absent
+
+  - name : create app directory
+    file :
+      path: /app
+      state: directory
+
+  - name : Download shipping 
+    get_url:
+       url:  https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
+       dest: /tmp/shipping.zip
+
+  - name : unzip shipping
+    unarchive:
+      src : /tmp/shipping.zip
+      dest : /app
+      remote_src: yes
+
+  - name: Install dependencies
+    command : mvn clean package
+    chdir: /app # if its not worked then use args before it (args)
+    
+  - name : move shipping jar
+    command : mv target/shipping-1.0.jar shipping.jar 
+    args : 
+      chdir : /app
+
+  - name : copy shipping.service
+    template :
+      src: catalogue.shipping.j2
+      dest: /etc/systemd/system/shipping.service
