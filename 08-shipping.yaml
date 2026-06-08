@@ -3,73 +3,73 @@
   become : yes
 
   tasks :
-  - name : Install maven
-    package :
-      name : "{{ item }}"
-      state : present
-    loop :
-    - maven
-    - mysql
-  
-  - name : create roboshop system user
-    user :
-      name : roboshop
-      system : true 
-      home : /app
-      shell: /sbin/nologin
-      comment: "roboshop system user"
-
-  - name : remove app directory
-    file :
-      path: /app
-      state: absent
-
-  - name : Delete shipping.zip file in the tmp directory
-    file :
-      path: /tmp/shipping.zip
-      state: absent
-
-  - name : create app directory
-    file :
-      path: /app
-      state: directory
-
-  - name : Download shipping 
-    get_url:
-       url:  https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-       dest: /tmp/shipping.zip
-
-  - name : unzip shipping
-    unarchive:
-      src : /tmp/shipping.zip
-      dest : /app
-      remote_src: yes
-
-  - name: Install dependencies
-    command : mvn clean package
-    args : 
-      chdir: /app 
+    - name : Install maven
+      package :
+        name : "{{ item }}"
+        state : present
+      loop :
+      - maven
+      - mysql
     
-  - name : move shipping jar
-    command : mv target/shipping-1.0.jar shipping.jar 
-    args : 
-      chdir : /app
+    - name : create roboshop system user
+      user :
+        name : roboshop
+        system : true 
+        home : /app
+        shell: /sbin/nologin
+        comment: "roboshop system user"
 
-  - name : copy shipping.service
-    template :
-      src: catalogue.shipping.j2
-      dest: /etc/systemd/system/shipping.service
-      remote_src : yes
+    - name : remove app directory
+      file :
+        path: /app
+        state: absent
+
+    - name : Delete shipping.zip file in the tmp directory
+      file :
+        path: /tmp/shipping.zip
+        state: absent
+
+    - name : create app directory
+      file :
+        path: /app
+        state: directory
+
+    - name : Download shipping 
+      get_url:
+        url:  https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
+        dest: /tmp/shipping.zip
+
+    - name : unzip shipping
+      unarchive:
+        src : /tmp/shipping.zip
+        dest : /app
+        remote_src: yes
+
+    - name: Install dependencies
+      command : mvn clean package
+      args : 
+        chdir: /app 
       
-  - name : Load mysql data
-    ansible.mysql.mysql_db:
-      state: import
-      name: all
-      login_user : root
-      login_password : Roboshop@1
-      login_host : "{{ MYSQL_HOST }}"
-      target : 
-    loop:
-    - /app/db/schema.sql
-    - /app/db/app-user.sql 
-    - /app/db/master-data.sql
+    - name : move shipping jar
+      command : mv target/shipping-1.0.jar shipping.jar 
+      args : 
+        chdir : /app
+
+    - name : copy shipping.service
+      template :
+        src: catalogue.shipping.j2
+        dest: /etc/systemd/system/shipping.service
+        remote_src : yes
+        
+    - name : Load mysql data
+      ansible.mysql.mysql_db:
+        state: import
+        name: all
+        login_user : root
+        login_password : Roboshop@1
+        login_host : "{{ MYSQL_HOST }}"
+        target : 
+      loop:
+      - /app/db/schema.sql
+      - /app/db/app-user.sql 
+      - /app/db/master-data.sql
