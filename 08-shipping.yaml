@@ -57,7 +57,7 @@
 
   - name : copy shipping.service
     template :
-      src: catalogue.shipping.j2
+      src: shipping.service.j2
       dest: /etc/systemd/system/shipping.service
       remote_src : yes
       
