@@ -60,10 +60,15 @@
       src: shipping.service.j2
       dest: /etc/systemd/system/shipping.service
       
-  - name : Install python dependencies
-    pip : 
-      name : PyMySQL
-      executable: pip3.9
+  - name : Install python3-pip
+    package:
+      name: python3-pip
+      state: present
+
+  - name : Install PyMySQL
+    pip:
+      name: PyMySQL
+      executable: pip3
 
   - name : Load mysql data
     community.mysql.mysql_db:
@@ -77,3 +82,14 @@
     - /app/db/schema.sql
     - /app/db/app-user.sql 
     - /app/db/master-data.sql
+  
+  - name : daemon reload
+    systemd_service:
+      name : shipping
+      daemon_reload : true
+
+  - name : Start and enable shipping
+    service :
+      name : shipping
+      state : restarted
+      enabled : yes
