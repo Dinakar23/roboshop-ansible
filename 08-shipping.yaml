@@ -5,8 +5,11 @@
   tasks :
   - name : Install maven
     package :
-      name : maven
+      name : {{ item }}
       state : present
+    loop :
+    - maven
+    - mysql
   
   - name : create roboshop system user
     user :
@@ -56,5 +59,11 @@
     template :
       src: catalogue.shipping.j2
       dest: /etc/systemd/system/shipping.service
-
-  
+      remote_src : yes
+      
+  - name : Load mysql data
+    ansible.mysql.mysql_db:
+      state: import
+      name: all
+      encoding: 
+      target: 
