@@ -62,13 +62,13 @@
       remote_src : yes
       
   - name : Load mysql data
-    ansible.mysql.mysql_db:
+    community.mysql.mysql_db:
       state: import
       name: all
       login_user : root
       login_password : Roboshop@1
       login_host : "{{ MYSQL_HOST }}"
-      target : 
+      target : "{{ item }}"
     loop:
     - /app/db/schema.sql
     - /app/db/app-user.sql 
