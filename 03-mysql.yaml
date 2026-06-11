@@ -1,41 +1,40 @@
-- name: configuring the mysql server
+- name: configuring mysql server
   hosts: mysql
   become: yes
 
   tasks:
-  - name: installing mysql server
-    ansible.builtin.package:
+
+  - name: Install mysql server
+    package:
       name: mysql-server
       state: present
-  
-  - name: start and enabling the services
-    ansible.builtin.service:
-      name: mysql                    #  FIX: Changed from mysqld to mysql
-      state: started                 #  FIX: Use started instead of restarted for initial run
+
+  - name: Start and enable mysql
+    service:
+      name: mysqld
+      state: started
       enabled: yes
 
-  - name: Configure MySQL to listen on all network interfaces
-    ansible.builtin.lineinfile:
-      path: /etc/my.cnf.d/mysql-server.cnf
-      regexp: '^bind-address'
-      line: 'bind-address = 0.0.0.0' #  FIX: Injects network binding rule automatically
-      insertafter: '\[mysqld\]'
+  - name: Set root password
+    command: mysql_secure_installation --set-root-pass RoboShop@1
 
-  - name: Check if MySQL root credentials already work
-    ansible.builtin.command: mysql -u root -pRoboShop@1 -e "status"
-    register: mysql_root_check
-    ignore_errors: yes
-    changed_when: false
+  - name: Install PyMySQL
+    pip:
+      name: PyMySQL
+      executable: pip3
 
-  - name: setup root password if not configured
-    ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
-    when: mysql_root_check.failed    #  FIX: Only runs if the password isn't already set
+  - name: Allow root login from any host
+    community.mysql.mysql_user:
+      name: root
+      host: "%"
+      password: RoboShop@1
+      priv: ".,GRANT"
+      state: present
+      login_user: root
+      login_password: RoboShop@1
 
-  - name: Allow root user login from remote hosts
-    ansible.builtin.command: mysql -u root -pRoboShop@1 -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'RoboShop@1'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
-    changed_when: true               #  FIX: Moved to the end so authentication works
-
-  - name: Restart MySQL to apply all changes
-    ansible.builtin.service:
-      name: mysql
-      state: restarted
+  - name: Flush privileges
+    community.mysql.mysql_query:
+      login_user: root
+      login_password: RoboShop@1
+      query: FLUSH PRIVILEGES;
