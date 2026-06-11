@@ -16,3 +16,11 @@
 
   - name : setup root password
     command : mysql_secure_installation --set-root-pass RoboShop@1
+
+  - name: Allow root user login from remote hosts
+    ansible.builtin.command: mysql -u root -pRoboShop@1 -e "CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY 'RoboShop@1'; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+    changed_when: true 
+
+  
+    
+  
