@@ -75,19 +75,31 @@
       name: PyMySQL
       executable: pip3.9
 
-  - name : Load mysql data
+  # - name : Load mysql data
+  #   community.mysql.mysql_db:
+  #     state: import
+  #     name: all
+  #     login_user : root
+  #     login_password : RoboShop@1
+  #     login_host : "{{ MYSQL_HOST }}"
+  #     target : "{{ item }}"
+  #   loop:
+  #   - /app/db/schema.sql
+  #   - /app/db/app-user.sql 
+  #   - /app/db/master-data.sql
+  #   tags : load
+  - name: load mysql data
     community.mysql.mysql_db:
       state: import
       name: all
-      login_user : root
-      login_password : RoboShop@1
-      login_host : "{{ MYSQL_HOST }}"
-      target : "{{ item }}"
+      login_user: root
+      login_password: RoboShop@1
+      login_host: "{{ MYSQL_HOST }}"
+      target: "{{ item }}"
     loop:
     - /app/db/schema.sql
     - /app/db/app-user.sql 
     - /app/db/master-data.sql
-    tags : load
   
   - name : daemon reload ,start , enable shipping
     systemd_service:
