@@ -1,41 +1,18 @@
-- name: configuring the mysql server
-  hosts: mysql
-  become: yes
+- name : configuring the mysql server
+  hosts : mysql
+  become : yes
 
-  tasks:
-  - name: Install mysql server
-    ansible.builtin.package:
-      name: mysql-server
-      state: present
+  tasks :
+  - name : installing mysql server
+    package :
+      name : mysql
+      state : present
+  
+  - name : start and enabling the services
+    service :
+      name : mysqld
+      state : restarted
+      enabled : yes
 
-  - name: Start and Enable the MySQL Service
-    ansible.builtin.service:
-      name: mysqld
-      state: started
-      enabled: yes
-
-  # FIX 1: Automate the bind-address change right inside the correct config file
-  - name: Configure MySQL to listen on all network interfaces
-    ansible.builtin.lineinfile:
-      path: /etc/my.cnf.d/mysql-server.cnf
-      regexp: '^bind-address'
-      line: 'bind-address = 0.0.0.0'
-      insertafter: '\[mysqld\]'
-    notify: Restart MySQL Service
-
-  # FIX 2: Safely check and set the root password without breaking on multiple runs
-  - name: Check if MySQL root credentials work
-    ansible.builtin.command: mysql -u root -pRoboShop@1 -e "status"
-    register: mysql_root_check
-    ignore_errors: yes
-    changed_when: false
-
-  - name: Setup root password if not already configured
-    ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
-    when: mysql_root_check.failed
-
-  handlers:
-  - name: Restart MySQL Service
-    ansible.builtin.service:
-      name: mysqld
-      state: restarted
+  - name : setup root password
+    command : mysql_secure_installation --set-root-pass RoboShop@1
