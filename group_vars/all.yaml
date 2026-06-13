@@ -10,3 +10,4 @@ USER_HOST : user.dinakardevops.online
 RABBITMQ_HOST : rabbitmq.dinakardevops.online
 SHIPPING_HOST : shipping.dinakardevops.online
 PAYMENT_HOST : payment.dinakardevops.online
+FRONTEND_HOST : dinakardevops.online
